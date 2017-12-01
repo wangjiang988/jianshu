@@ -69,6 +69,14 @@ ROBOTSTXT_OBEY = True
 #ITEM_PIPELINES = {
 #    'tutorial.pipelines.TutorialPipeline': 300,
 #}
+ITEM_PIPELINES = {
+    'tutorial.pipelines.MongoPipeline': 300,
+    # 'myproject.pipelines.JsonWriterPipeline': 800,
+}
+
+MONGO_URI = 'mongodb://localhost:27017/'
+MONGO_DATABASE = 'jianshu'
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
