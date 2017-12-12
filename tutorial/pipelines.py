@@ -5,7 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
-
+from scrapy import log
 
 class TutorialPipeline(object):
     def process_item(self, item, spider):
@@ -35,5 +35,11 @@ class MongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db[self.collection_name].insert_one(dict(item))
+        # 去重
+        item_indb = self.db[self.collection_name].find_one({"siteUrl":item['siteUrl']})
+        
+        if item_indb:
+            log.msg("重复值:%s" % item['siteUrl'],level=log.DEBUG, spider=spider) 
+        else:
+            self.db[self.collection_name].insert_one(dict(item))
         return item

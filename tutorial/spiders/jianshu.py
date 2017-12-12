@@ -3,7 +3,7 @@ import scrapy
 from tutorial.items import CategoryItem
 from scrapy.selector import Selector
 
-
+# 爬去简书最作者，及相关数据
 class JianshuSpider(scrapy.Spider):
     name = 'jianshu'
     allowed_domains = ['www.jianshu.com']
@@ -41,3 +41,4 @@ class JianshuSpider(scrapy.Spider):
         except Exception as e:
             print("发生错误")
         
+    
